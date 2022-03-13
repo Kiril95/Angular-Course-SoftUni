@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "typescript": "^4.6.2"
+  },
+  "name": "syntax-and-operations",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "build": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
