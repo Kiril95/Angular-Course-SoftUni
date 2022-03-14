@@ -1,2 +1,4 @@
 # Angular-Course-SoftUni
 Problem solutions for different exercises and mini-projects.
+
+![alt text](https://camo.githubusercontent.com/a0fdfaf9ba5d9792d2d2276bd508d55f0f7b9389c1ca0a9a111174c0430763d2/68747470733a2f2f736f6674756e692e62672f46696c65732f436f75727365732f31332e3130253230616e67756c6172253230776562736974652e706e67)
