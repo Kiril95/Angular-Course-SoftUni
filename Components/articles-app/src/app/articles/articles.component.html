@@ -1,0 +1,7 @@
+<ul>
+    <app-article *ngFor="let item of articles"
+     [article]="item"
+     [articleDesc]="item.description"
+     [author]="item.author">
+    </app-article>
+</ul>
