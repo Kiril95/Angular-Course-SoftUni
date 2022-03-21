@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PostsService } from './services/posts.service';
+import { IPost } from './interfaces/post';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title: string = 'forum-app';
+  posts: IPost[] | undefined;
+
+  constructor(private service: PostsService) { 
+    this.loadPosts();
+  }
+
+  loadPosts(): void{
+    this.posts = undefined;
+    this.service.getPosts().subscribe(post => this.posts = post);
+  }
 }

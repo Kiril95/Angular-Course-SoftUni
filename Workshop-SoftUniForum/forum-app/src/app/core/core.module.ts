@@ -4,6 +4,9 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AsideComponent } from './aside/aside.component';
 
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -11,7 +14,9 @@ import { AsideComponent } from './aside/aside.component';
     AsideComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatProgressBarModule,
+    BrowserAnimationsModule
   ],
   exports: [
     HeaderComponent,
