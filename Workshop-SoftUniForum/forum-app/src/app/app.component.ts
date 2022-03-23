@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { PostsService } from './services/posts.service';
 import { IPost } from './interfaces/post';
 
@@ -7,15 +8,19 @@ import { IPost } from './interfaces/post';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   posts: IPost[] | undefined;
 
-  constructor(private service: PostsService) { 
+  constructor(private service: PostsService, private router: Router) { 
     this.loadPosts();
+  }
+
+  ngOnInit() {
+    this.router.navigate(['']); // Redirect on page refresh
   }
 
   loadPosts(): void{
     this.posts = undefined;
-    this.service.getPosts().subscribe(post => this.posts = post);
+    this.service.getRecentPosts().subscribe(post => this.posts = post);
   }
 }

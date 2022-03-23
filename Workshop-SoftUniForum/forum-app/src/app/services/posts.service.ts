@@ -15,4 +15,8 @@ export class PostsService {
     return this.http.get<IPost[]>(`${baseUrl}/posts`)
   }
 
+  getRecentPosts(){
+    return this.http.get<IPost[]>(`${baseUrl}/posts?limit=5`)
+  }
+  
 }
