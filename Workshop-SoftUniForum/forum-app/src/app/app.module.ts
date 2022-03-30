@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AuthModule } from './auth/auth.module';
 import { PostsService } from './services/posts.service';
 import { ThemesService } from './services/themes.service';
 
@@ -20,6 +21,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
+    AuthModule,
     HttpClientModule,
     MatProgressBarModule
   ],

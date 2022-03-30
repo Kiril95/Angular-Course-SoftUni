@@ -7,12 +7,14 @@ import { AsideComponent } from './aside/aside.component';
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    AsideComponent
+    AsideComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   exports: [
     HeaderComponent,
     FooterComponent,
-    AsideComponent
+    AsideComponent,
+    HomeComponent
   ]
 })
 export class CoreModule { }
