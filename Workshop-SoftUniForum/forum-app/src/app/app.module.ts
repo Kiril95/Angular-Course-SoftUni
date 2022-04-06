@@ -5,25 +5,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AuthModule } from './auth/auth.module';
 import { PostsService } from './services/posts.service';
 import { ThemesService } from './services/themes.service';
+import { ThemeModule } from './theme/theme.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ThemesComponent } from './themes/themes.component';
-
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ThemesComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     AuthModule,
+    ThemeModule,
     HttpClientModule,
-    MatProgressBarModule
   ],
   providers: [
     ThemesService,

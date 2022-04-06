@@ -3,16 +3,18 @@
         <h2 class="title">
             {{title}}
         </h2>
-        <div *ngIf="data">
-            <div *ngFor="let item of data" class="aside-theme">
-                <a href="#">
-                    <h3>{{item.themeId.themeName}}</h3>
-                    <p>{{item.userId.username}}r</p>
-                    <p><span>{{item.created_at}}</span></p>
+        <div *ngIf="posts">
+            <div *ngFor="let post of posts" class="aside-theme">
+                <a [routerLink]="['/themes', post._id]">
+                    <h3>{{post.themeId.themeName}}</h3>
+                    <p>{{post.userId.username}}</p>
+                    <p><span>{{post.created_at}}</span></p>
                 </a>
             </div>
         </div>
     </div>
 </aside>
 
-<div id="load-bar" *ngIf="!data">Loading <mat-progress-bar mode="buffer"></mat-progress-bar></div>
+<div id="load-bar" *ngIf="!posts">Loading
+    <mat-progress-bar mode="buffer"></mat-progress-bar>
+</div>

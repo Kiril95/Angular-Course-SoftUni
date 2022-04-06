@@ -8,5 +8,5 @@ import { IPost } from '../../interfaces/post';
 })
 export class AsideComponent{
   @Input() title!: string;
-  @Input() data: IPost[] | undefined;
+  @Input() posts: IPost[] | undefined;
 }
