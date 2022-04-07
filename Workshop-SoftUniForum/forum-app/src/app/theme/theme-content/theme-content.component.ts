@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ITheme } from 'src/app/interfaces';
+import { ThemesService } from 'src/app/services/themes.service';
 
 @Component({
   selector: 'app-theme-content',
   templateUrl: './theme-content.component.html',
   styleUrls: ['./theme-content.component.sass']
 })
-export class ThemeContentComponent implements OnInit {
+export class ThemeContentComponent {
+  theme!: ITheme;
 
-  constructor() { }
+  constructor(private themeService: ThemesService, private route: ActivatedRoute) {
+    this.loadTheme();
+  }
 
-  ngOnInit(): void {
+  loadTheme(): void {
+    const { themeId } = this.route.snapshot.params;
+    //this.themeService.getThemeById(themeId).subscribe(data =>  {console.log(data)});
+
+    this.themeService.getThemeById(themeId).subscribe(targetTheme => this.theme = targetTheme);
   }
 
 }

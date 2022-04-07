@@ -5,7 +5,7 @@
         </h2>
         <div *ngIf="posts">
             <div *ngFor="let post of posts" class="aside-theme">
-                <a [routerLink]="['/themes', post._id]">
+                <a>
                     <h3>{{post.themeId.themeName}}</h3>
                     <p>{{post.userId.username}}</p>
                     <p><span>{{post.created_at}}</span></p>

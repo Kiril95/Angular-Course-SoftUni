@@ -11,7 +11,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.router.navigate(['']); // Redirect on page refresh
+    //this.router.navigate(['/home']); // Redirect on page refresh
   }
 
 }

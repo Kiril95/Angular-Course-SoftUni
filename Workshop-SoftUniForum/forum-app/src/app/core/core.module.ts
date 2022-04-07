@@ -8,13 +8,15 @@ import { AsideComponent } from './aside/aside.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
     AsideComponent,
-    HomeComponent
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     FooterComponent,
     AsideComponent,
-    HomeComponent
+    HomeComponent,
+    NotFoundComponent
   ]
 })
 export class CoreModule { }

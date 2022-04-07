@@ -7,6 +7,8 @@ import { ThemeRoutingModule } from './theme-routing.module';
 import { CoreModule } from '../core/core.module';
 import { CreateThemeComponent } from './create-theme/create-theme.component';
 import { ThemeContentComponent } from './theme-content/theme-content.component';
+import { ThemesService } from '../services/themes.service';
+import { PostsService } from '../services/posts.service';
 
 
 @NgModule({
@@ -21,6 +23,10 @@ import { ThemeContentComponent } from './theme-content/theme-content.component';
     MatProgressBarModule,
     HttpClientModule,
     CoreModule
-  ]
+  ],
+  providers: [
+    ThemesService,
+    PostsService,
+  ],
 })
 export class ThemeModule { }
