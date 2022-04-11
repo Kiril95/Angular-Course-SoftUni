@@ -1,5 +1,5 @@
 <div class="container">
-    <form class="register" action="" method="post">
+    <form #registerForm="ngForm" class="register" action="" method="post" (ngSubmit)="register(registerForm)">
 
         <fieldset>
             <h2>Registration Form</h2>
@@ -7,23 +7,35 @@
             <!-- username -->
             <p class="field field-icon">
                 <label for="username"><span><i class="fas fa-user"></i></span></label>
-                <input class="input-error" type="text" name="username" id="username" placeholder="Johny">
+                <input #usernameInput="ngModel" ngModel class="input-error" type="text" name="username" id="username" 
+                placeholder="Username" required minlength="3">
             </p>
-            <p class="error">
-                Username is required!
-            </p>
+
+            <ng-container *ngIf="usernameInput.touched">
+                <p class="error" *ngIf="usernameInput.errors?.['required']">
+                    Username is required!
+                </p>
+                <p *ngIf="usernameInput.errors?.['minlength']" class="error">
+                    Username must be at least 3 characters!
+                </p>
+            </ng-container>
+            
 
             <!-- email -->
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input type="email" name="email" id="email" placeholder="john.doe@gmail.com">
+                <input #emailInput="ngModel" ngModel class="input-error" type="email" name="email" id="email"
+                placeholder="Email adress" required email>
             </p>
-            <!-- <p class="error">
-                Email is required!
-            </p>
-            <p class="error">
-                Email is not valid!
-            </p> -->
+
+            <ng-container *ngIf="emailInput.touched">
+                <p *ngIf="emailInput.errors?.['required']" class="error">
+                    Email is required!
+                </p>
+                <p *ngIf="emailInput.errors?.['email']" class="error">
+                    Email is not valid!
+                </p>
+            </ng-container>
 
             <!-- telephone -->
             <p class="field field-icon">
@@ -31,9 +43,20 @@
                 <select name="select-tel" id="select-tel" class="tel">
                     <option value="00359">+359</option>
                 </select>
-                <input type="text" name="tel" id="tel" placeholder="885 888 888">
+                <input #phoneInput="ngModel" ngModel [pattern]="phonePattern" type="text" name="tel" id="tel" 
+                placeholder="885 888 888" required>
             </p>
 
+            <ng-container *ngIf="phoneInput.touched">
+                <p *ngIf="phoneInput.errors?.['required']" class="error">
+                    Phone number is required!
+                </p>
+                <p *ngIf="phoneInput.errors?.['pattern']" class="error">
+                    Phone number is not valid!
+                </p>
+            </ng-container>
+            
+            
             <!-- password -->
             <p class="field field-icon">
                 <label for="password"><span><i class="fas fa-lock"></i></span></label>
