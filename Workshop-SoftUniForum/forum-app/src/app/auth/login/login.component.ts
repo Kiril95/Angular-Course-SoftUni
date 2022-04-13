@@ -1,27 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { emailValidator } from '../validators';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass']
 })
-export class LoginComponent implements OnInit {
-  //form: NgForm | undefined;
+export class LoginComponent {
+  loginForm: FormGroup = this.formBuilder.group({
+    'email': new FormControl('', [Validators.required, emailValidator]),
+    'password': new FormControl('', [Validators.required, Validators.minLength(5)])
+  });
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-  }
-
-  login(form: NgForm): void {
-    if (form.invalid) {
-      return;
+  login(): void {
+    const body = {
+      email: this.loginForm.controls['email'].value,
+      password: this.loginForm.controls['password'].value,
     }
-    const { email, password } = form.value;
-    console.log(email);
-    console.log(password);
 
+    console.log(body);
+    
 
   }
 }

@@ -1,5 +1,5 @@
 <div class="container">
-    <form #registerForm="ngForm" class="register" action="" method="post" (ngSubmit)="register(registerForm)">
+    <form [formGroup]="registerForm" class="register" action="" method="post" (ngSubmit)="register()">
 
         <fieldset>
             <h2>Registration Form</h2>
@@ -7,16 +7,15 @@
             <!-- username -->
             <p class="field field-icon">
                 <label for="username"><span><i class="fas fa-user"></i></span></label>
-                <input #usernameInput="ngModel" ngModel class="input-error" type="text" name="username" id="username" 
-                placeholder="Username" required minlength="3">
+                <input formControlName="username" class="input-error" type="text" name="username" id="username" placeholder="Username">
             </p>
 
-            <ng-container *ngIf="usernameInput.touched">
-                <p class="error" *ngIf="usernameInput.errors?.['required']">
+            <ng-container *ngIf="registerForm.controls['username'].touched && registerForm.controls['username'].invalid">
+                <p class="error" *ngIf="registerForm.controls['username'].errors?.['required']">
                     Username is required!
                 </p>
-                <p *ngIf="usernameInput.errors?.['minlength']" class="error">
-                    Username must be at least 3 characters!
+                <p *ngIf="registerForm.controls['username'].errors?.['minlength']" class="error">
+                    Username must be at least 5 characters long!
                 </p>
             </ng-container>
             
@@ -24,65 +23,78 @@
             <!-- email -->
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input #emailInput="ngModel" ngModel class="input-error" type="email" name="email" id="email"
-                placeholder="Email adress" required email>
+                <input formControlName="email" class="input-error" type="email" name="email" id="email"placeholder="Email adress">
             </p>
 
-            <ng-container *ngIf="emailInput.touched">
-                <p *ngIf="emailInput.errors?.['required']" class="error">
+            <ng-container *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].invalid">
+                <p *ngIf="registerForm.controls['email'].errors?.['required']" class="error">
                     Email is required!
                 </p>
-                <p *ngIf="emailInput.errors?.['email']" class="error">
+                <p *ngIf="registerForm.controls['email'].errors?.['emailError']" class="error">
                     Email is not valid!
                 </p>
             </ng-container>
 
+
             <!-- telephone -->
             <p class="field field-icon">
                 <label for="tel"><span><i class="fas fa-phone"></i></span></label>
-                <select name="select-tel" id="select-tel" class="tel">
-                    <option value="00359">+359</option>
+                <select formControlName="phoneRegion" name="select-tel" id="select-tel" class="tel">
+                    <option value="+359">+359</option>
                 </select>
-                <input #phoneInput="ngModel" ngModel [pattern]="phonePattern" type="text" name="tel" id="tel" 
-                placeholder="885 888 888" required>
+                <input formControlName="phone" type="text" name="tel" id="tel" placeholder="885777666" >
             </p>
 
-            <ng-container *ngIf="phoneInput.touched">
-                <p *ngIf="phoneInput.errors?.['required']" class="error">
+            <ng-container *ngIf="registerForm.controls['phone'].touched && registerForm.controls['phone'].invalid">
+                <p *ngIf="registerForm.controls['phoneRegion'].errors?.['required']" class="error">
+                    Country region is required!
+                </p>
+                <p *ngIf="registerForm.controls['phone'].errors?.['required']" class="error">
                     Phone number is required!
                 </p>
-                <p *ngIf="phoneInput.errors?.['pattern']" class="error">
+                <p *ngIf="registerForm.controls['phone'].errors?.['phoneError']" class="error">
                     Phone number is not valid!
                 </p>
             </ng-container>
             
             
             <!-- password -->
-            <p class="field field-icon">
-                <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="password" id="password" placeholder="******">
-            </p>
-            <!-- <p class="error">
-                Password is required!
-            </p>
-            <p class="error">
-                Password must be at least 4 characters!
-            </p> -->
+            <div formGroupName="passGroup">
+                <p class="field field-icon">
+                    <label for="password"><span><i class="fas fa-lock"></i></span></label>
+                    <input formControlName="password" type="password" name="password" id="password" placeholder="******">
+                </p>
+                <ng-container *ngIf="passwordGroup.controls['password'].touched && passwordGroup.controls['password'].invalid">
+                    <p class="error" *ngIf="passwordGroup.controls['password'].errors?.['required']">
+                        Password is required!
+                    </p>
+                    <p class="error" *ngIf="passwordGroup.controls['password'].errors?.['minlength']">
+                        Password must be at least 4 characters!
+                    </p>
+                </ng-container>
 
-            <!-- rePassword -->
-            <p class="field field-icon">
-                <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="rePassword" id="rePassword" placeholder="******">
-            </p>
-            <!-- <p class="error">Repeat Password does not match password!</p> -->
-
-            <button disabled>Create Account</button>
+                <!-- rePassword -->
+                <p class="field field-icon">
+                    <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
+                    <input formControlName="rePassword" type="password" name="rePassword" id="rePassword" placeholder="******">
+                </p>
+                
+                <ng-container *ngIf="passwordGroup.controls['rePassword'].touched && passwordGroup.controls['rePassword'].invalid">
+                    <p class="error" *ngIf="passwordGroup.controls['rePassword'].errors?.['required']">
+                        Password repeat is required!
+                    </p>
+                    <p class="error" *ngIf="passwordGroup.controls['rePassword'].errors?.['passwordsDiffer']">
+                        Passwords do not match!
+                    </p> 
+                </ng-container>
+            </div>
+            
+            <button type="submit" [disabled]="registerForm.invalid">Create Account</button>
 
             <p class="text-center">
                 Have an account?
                 <a routerLink="/login">Log In</a>
             </p>
-
         </fieldset>
     </form>
 </div>

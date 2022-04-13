@@ -1,45 +1,44 @@
 <div class="container">
-    <form #loginForm="ngForm" class="login" action="" method="post" (ngSubmit)="login(loginForm)">
+    <form [formGroup]="loginForm" class="login" action="" method="post" (ngSubmit)="login()">
         <fieldset>
             <h2>Login Form</h2>
 
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input #emailInput="ngModel" ngModel class="input-error" type="email" name="email" id="email"
+                <input formControlName="email" class="input-error" type="email" name="email" id="email"
                  placeholder="Email adress" required email>
             </p>
 
-            <ng-container *ngIf="emailInput.touched">
-                <p *ngIf="emailInput.errors?.['required']" class="error">
+            <ng-container *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid">
+                <p *ngIf="loginForm.controls['email'].errors?.['required']" class="error">
                     Email is required!
                 </p>
-                <p *ngIf="emailInput.errors?.['email']" class="error">
+                <p *ngIf="loginForm.controls['email'].errors?.['email']" class="error">
                     Email is not valid!
                 </p>
             </ng-container>
             
             <p class="field field-icon">
                 <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input #passInput="ngModel" ngModel type="password" name="password" id="password" 
-                placeholder="******" required [minlength]="4">
+                <input formControlName="password" type="password" name="password" id="password" 
+                placeholder="******" required [minlength]="5">
             </p>
 
-            <ng-container *ngIf="passInput.touched">
-                <p *ngIf="passInput.errors?.['required']" class="error">
+            <ng-container *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
+                <p *ngIf="loginForm.controls['password'].errors?.['required']" class="error">
                     Password is required!
                 </p>
-                <p *ngIf="passInput.errors?.['minlength']" class="error">
-                    Password must be at least 4 characters!
+                <p *ngIf="loginForm.controls['password'].errors?.['minlength']" class="error">
+                    Password must be at least 5 characters!
                 </p>
             </ng-container>
             
-            <button>Login</button>
+            <button type="submit" [disabled]="loginForm.invalid">Login</button>
 
             <p class="text-center">
                 Have an account?
                 <a routerLink="/register">Register</a>
             </p>
-
         </fieldset>
     </form>
 </div>
