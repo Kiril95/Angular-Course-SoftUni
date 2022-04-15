@@ -5,23 +5,21 @@
 
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input formControlName="email" class="input-error" type="email" name="email" id="email"
-                 placeholder="Email adress" required email>
+                <input formControlName="email" class="input-error" type="email" name="email" id="email"placeholder="Email adress">
             </p>
 
             <ng-container *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid">
                 <p *ngIf="loginForm.controls['email'].errors?.['required']" class="error">
                     Email is required!
                 </p>
-                <p *ngIf="loginForm.controls['email'].errors?.['email']" class="error">
+                <p *ngIf="loginForm.controls['email'].errors?.['emailError']" class="error">
                     Email is not valid!
                 </p>
             </ng-container>
             
             <p class="field field-icon">
                 <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input formControlName="password" type="password" name="password" id="password" 
-                placeholder="******" required [minlength]="5">
+                <input formControlName="password" type="password" name="password" id="password" placeholder="******">
             </p>
 
             <ng-container *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">

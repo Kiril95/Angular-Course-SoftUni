@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { emailValidator, phoneValidator, passwordMatchCheck } from '../validators';
+import { UserService } from './../../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -9,35 +10,50 @@ import { emailValidator, phoneValidator, passwordMatchCheck } from '../validator
   styleUrls: ['./register.component.sass']
 })
 export class RegisterComponent {
-  passwordControl = new FormControl(null, [Validators.required, Validators.minLength(4)]);
+  passwordControl = new FormControl(null, [Validators.required, Validators.minLength(5)]);
 
   registerForm: FormGroup = this.formBuilder.group({
     'username': new FormControl(null, [Validators.required, Validators.minLength(5)]),
     'email': new FormControl(null, [Validators.required, emailValidator]),
     'phone': new FormControl(null, [Validators.required, phoneValidator]),
-    'phoneRegion' : new FormControl(null, [Validators.required]),
+    'phoneRegion': new FormControl(null, [Validators.required]),
     passGroup: new FormGroup({
       'password': this.passwordControl,
       'rePassword': new FormControl(null, [Validators.required, passwordMatchCheck(this.passwordControl)]),
     })
   });
 
-  get passwordGroup(){
+  get passwordGroup() {
     return this.registerForm.controls['passGroup'] as FormGroup;
   }
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private userService: UserService) { }
 
-  register(): void{
+  register(): void {
+    if (this.registerForm.invalid) {
+      return;
+    }
+    
     const body = {
       username: this.registerForm.controls['username'].value,
       email: this.registerForm.controls['email'].value,
-      phone: this.registerForm.controls['phoneRegion'].value + this.registerForm.controls['phone'].value,
-      password: this.passwordGroup.controls['password'].value
+      password: this.passwordGroup.controls['password'].value,
+      rePassword: this.passwordGroup.controls['rePassword'].value,
+      phoneRegion: this.registerForm.controls['phoneRegion'].value,
+      tel: this.registerForm.controls['phone'].value
     }
 
-    console.log(body);
-    
+    this.userService.registerUser(body).subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 
 }

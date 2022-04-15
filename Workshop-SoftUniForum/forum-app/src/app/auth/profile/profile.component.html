@@ -1,18 +1,74 @@
 <div class="container">
-    <div class="profile"><img src="/assets/profile.png" alt="default user">
-        <h3>User Info:</h3>
-        <div class="flex">
-            <p>Username: </p>
-            <p>{{user?.username}}</p>
-        </div>
-        <div class="flex">
-            <p>Email: </p>
-            <p>{{user?.email}}</p>
-        </div>
-        <div class="flex">
-            <p>Phone: </p>
-            <p>{{user?.phone}}</p>
-        </div>
-        <!-- <button (click)="editProfile()" class="edit-button">Edit</button> -->
+    <div class="profile">
+        <img src="../.././../assets/profile.png" alt="default user">
+
+        <ng-container *ngIf="!editMode">
+            <h3>User Info:</h3>
+            <div class="flex">
+                <p>Username: </p>
+                <p>{{user?.username}}</p>
+            </div>
+            <div class="flex">
+                <p>Email: </p>
+                <p>{{user?.email}}</p>
+            </div>
+            <div class="flex">
+                <p>Phone: </p>
+                <p>{{user?.tel}}</p>
+            </div>
+            <button (click)="editMode = true" class="edit-button">Edit</button>
+        </ng-container>
+
+        <ng-container *ngIf="editMode">
+            <form #editForm="ngForm" (ngSubmit)="editProfile(editForm)">
+                <div class="flex">
+                    <p>Username: </p>
+                    <input #username="ngModel" ngModel name="username" type="text" name="username" id="username" 
+                    [ngModel]="user?.username" required minlength="5">
+
+                    <ng-container *ngIf="username.touched && username.invalid">
+                        <p class="error" *ngIf="username.errors?.['required']">
+                            Username is required.
+                        </p>
+                        <p class="error" *ngIf="username.errors?.['minlength']">
+                            Username must be at least 5 characters long.
+                        </p>
+                    </ng-container>
+                </div>
+                <div class="flex">
+                    <p>Email: </p>
+                    <input #email="ngModel" ngModel name="email" type="email" name="email" id="email" 
+                    [ngModel]="user?.email" required email>
+
+                    <ng-container *ngIf="email.touched && email.invalid">
+                        <p class="error" *ngIf="email.errors?.['required']">
+                            Email is required.
+                        </p>
+                        <p class="error" *ngIf="email.errors?.['email']">
+                            Email is not valid.
+                        </p>
+                    </ng-container>
+                </div>
+                <div class="flex">
+                    <p>Phone: </p>
+                    <div>
+                        <select name="select-tel" id="select-tel" class="tel">
+                                <option value="00359">+359</option>
+                            </select>
+                        <input #phone="ngModel" ngModel name="email" type="text" name="tel" id="tel" 
+                        [ngModel]="user?.tel" required>
+
+                        <ng-container *ngIf="phone.touched && phone.invalid">
+                            <p class="error" *ngIf="phone.errors?.['required']">
+                                Phone number is required.
+                            </p>
+                        </ng-container>
+                    </div>
+                </div>
+                <button type="button" (click)="editMode = false" class="red-button">Cancel</button>
+                <button class="green-button">Save</button>
+            </form>
+        </ng-container>
+
     </div>
 </div>

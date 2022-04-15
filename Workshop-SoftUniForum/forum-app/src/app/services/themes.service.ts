@@ -13,11 +13,14 @@ export class ThemesService {
   constructor(private http: HttpClient) { }
 
   getThemes(): Observable<ITheme[]>{
-    return this.http.get<ITheme[]>(`${baseUrl}/themes`)
+    return this.http.get<ITheme[]>(`${baseUrl}/themes`, { withCredentials: true });
   }
 
   getThemeById(id: string): Observable<ITheme> {
-    return this.http.get<ITheme>(`${baseUrl}/themes/${id}`);
+    return this.http.get<ITheme>(`${baseUrl}/themes/${id}`, { withCredentials: true });
   }
 
+  addTheme(data : { themeName: string, postText: string }): Observable<Object>{
+    return this.http.post(`${baseUrl}/themes`, data,  { withCredentials: true });
+  }
 }

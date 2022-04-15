@@ -9,6 +9,7 @@ import { CreateThemeComponent } from './create-theme/create-theme.component';
 import { ThemeContentComponent } from './theme-content/theme-content.component';
 import { ThemesService } from '../services/themes.service';
 import { PostsService } from '../services/posts.service';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { PostsService } from '../services/posts.service';
     ThemeRoutingModule,
     MatProgressBarModule,
     HttpClientModule,
-    CoreModule
+    CoreModule,
+    FormsModule
   ],
   providers: [
     ThemesService,

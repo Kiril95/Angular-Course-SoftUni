@@ -13,11 +13,11 @@ export class PostsService {
   constructor(private http: HttpClient) { }
 
   getPosts(): Observable<IPost[]>{
-    return this.http.get<IPost[]>(`${baseUrl}/posts`)
+    return this.http.get<IPost[]>(`${baseUrl}/posts`, { withCredentials: true });
   }
 
   getRecentPosts(): Observable<IPost[]>{
-    return this.http.get<IPost[]>(`${baseUrl}/posts?limit=5`)
+    return this.http.get<IPost[]>(`${baseUrl}/posts?limit=5`, { withCredentials: true });
   }
   
 }

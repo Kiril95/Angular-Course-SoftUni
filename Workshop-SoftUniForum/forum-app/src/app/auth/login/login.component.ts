@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 import { emailValidator } from '../validators';
 
 @Component({
@@ -10,20 +11,33 @@ import { emailValidator } from '../validators';
 })
 export class LoginComponent {
   loginForm: FormGroup = this.formBuilder.group({
-    'email': new FormControl('', [Validators.required, emailValidator]),
-    'password': new FormControl('', [Validators.required, Validators.minLength(5)])
+    'email': new FormControl(null, [Validators.required, emailValidator]),
+    'password': new FormControl(null, [Validators.required, Validators.minLength(5)])
   });
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private router: Router,
+    private userService: UserService) { }
 
   login(): void {
+    if (this.loginForm.invalid) {
+      return;
+    }
+
     const body = {
       email: this.loginForm.controls['email'].value,
       password: this.loginForm.controls['password'].value,
     }
 
-    console.log(body);
-    
-
+    this.userService.loginUser(body).subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
+
 }
