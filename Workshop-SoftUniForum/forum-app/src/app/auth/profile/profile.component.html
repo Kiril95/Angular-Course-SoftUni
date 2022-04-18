@@ -38,13 +38,13 @@
                 <div class="flex">
                     <p>Email: </p>
                     <input #email="ngModel" ngModel name="email" type="email" name="email" id="email" 
-                    [ngModel]="user?.email" required email>
+                    [ngModel]="user?.email" required pattern="\w{6,}@gmail\.(com|bg)">
 
                     <ng-container *ngIf="email.touched && email.invalid">
                         <p class="error" *ngIf="email.errors?.['required']">
                             Email is required.
                         </p>
-                        <p class="error" *ngIf="email.errors?.['email']">
+                        <p class="error" *ngIf="email.errors?.['pattern']">
                             Email is not valid.
                         </p>
                     </ng-container>
@@ -56,11 +56,14 @@
                                 <option value="00359">+359</option>
                             </select>
                         <input #phone="ngModel" ngModel name="email" type="text" name="tel" id="tel" 
-                        [ngModel]="user?.tel" required>
+                        [ngModel]="user?.tel" required pattern="^[0-9]{9}$">
 
                         <ng-container *ngIf="phone.touched && phone.invalid">
                             <p class="error" *ngIf="phone.errors?.['required']">
                                 Phone number is required.
+                            </p>
+                            <p class="error" *ngIf="phone.errors?.['pattern']">
+                                Phone number is not valid.
                             </p>
                         </ng-container>
                     </div>

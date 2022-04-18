@@ -10,7 +10,7 @@ import { UserService } from './services/user.service';
 export class AppComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService) {
-    this.userService.getUserProfile()?.subscribe(); // When the page is refreshed, we don't lose our login
+    //this.userService.getUserProfile()?.subscribe(); // When the page is refreshed, we don't lose our login
   }
   
   ngOnInit() {

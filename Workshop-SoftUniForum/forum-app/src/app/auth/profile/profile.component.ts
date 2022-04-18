@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent {
   editMode: boolean = false;
-
-  constructor(private userService: UserService, private router: Router) { }
+  
+  constructor(private userService: UserService) { }
   
   get user() {
     return this.userService.user;

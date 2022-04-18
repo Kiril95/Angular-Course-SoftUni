@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { IUser } from '../interfaces';
-import { catchError, tap } from 'rxjs';
+import { catchError, EMPTY, tap } from 'rxjs';
 
 const baseUrl = environment.apiURL;
 
@@ -34,7 +34,10 @@ export class UserService {
 
   getUserProfile() {
     return this.http.get<IUser>(`${baseUrl}/users/profile`, { withCredentials: true })
-    .pipe(tap(currUser => this.user = currUser));
+    .pipe(tap(currUser => this.user = currUser),
+    catchError((err) => {
+      return EMPTY;
+    }))
   }
 
   updateProfile(data: { username: string, email: string, tel: string }) {
