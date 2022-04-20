@@ -9,9 +9,9 @@ import { UserService } from '../services/user.service';
 
 @NgModule({
   declarations: [
+    ProfileComponent,
     RegisterComponent,
     LoginComponent,
-    ProfileComponent
   ],
   imports: [
     CommonModule,

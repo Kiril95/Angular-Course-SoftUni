@@ -11,8 +11,8 @@ import { emailValidator } from '../validators';
 })
 export class LoginComponent {
   loginForm: FormGroup = this.formBuilder.group({
-    'email': new FormControl(null, [Validators.required, emailValidator]),
-    'password': new FormControl(null, [Validators.required, Validators.minLength(5)])
+    'email': new FormControl(null, { validators: [Validators.required, emailValidator], updateOn: 'blur' }),
+    'password': new FormControl(null, { validators: [Validators.required, Validators.minLength(5)], updateOn: 'blur' })
   });
 
   constructor(

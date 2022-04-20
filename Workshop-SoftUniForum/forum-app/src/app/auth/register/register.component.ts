@@ -10,12 +10,12 @@ import { UserService } from './../../services/user.service';
   styleUrls: ['./register.component.sass']
 })
 export class RegisterComponent {
-  passwordControl = new FormControl(null, [Validators.required, Validators.minLength(5)]);
+  passwordControl = new FormControl(null, { validators: [Validators.required, Validators.minLength(5)], updateOn: 'blur' });
 
   registerForm: FormGroup = this.formBuilder.group({
-    'username': new FormControl(null, [Validators.required, Validators.minLength(5)]),
-    'email': new FormControl(null, [Validators.required, emailValidator]),
-    'phone': new FormControl(null, [Validators.required, phoneValidator]),
+    'username': new FormControl(null, { validators: [Validators.required, Validators.minLength(5)], updateOn: 'blur' }),
+    'email': new FormControl(null, { validators: [Validators.required, emailValidator], updateOn: 'blur' }),
+    'phone': new FormControl(null, { validators: [Validators.required, phoneValidator], updateOn: 'blur' }),
     'phoneRegion': new FormControl(null, [Validators.required]),
     passGroup: new FormGroup({
       'password': this.passwordControl,

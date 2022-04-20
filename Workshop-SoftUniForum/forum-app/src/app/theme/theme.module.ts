@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -22,7 +21,6 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     ThemeRoutingModule,
     MatProgressBarModule,
-    HttpClientModule,
     CoreModule,
     FormsModule
   ],

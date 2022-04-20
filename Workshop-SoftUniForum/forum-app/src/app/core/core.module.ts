@@ -6,7 +6,6 @@ import { FooterComponent } from './footer/footer.component';
 import { AsideComponent } from './aside/aside.component';
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
@@ -21,7 +20,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
   imports: [
     CommonModule,
     MatProgressBarModule,
-    BrowserAnimationsModule,
     RouterModule
   ],
   exports: [

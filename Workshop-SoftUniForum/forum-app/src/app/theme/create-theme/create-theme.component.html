@@ -3,7 +3,7 @@
         <div class="header-background">
             <span>New Theme</span>
         </div>
-        <form #addThemeForm="ngForm" (ngSubmit)="submitTheme(addThemeForm)">
+        <form [ngFormOptions]="{updateOn: 'blur'}" #addThemeForm="ngForm" (ngSubmit)="submitTheme(addThemeForm)">
             <div class="new-theme-title">
                 <label for="themeName">Title <span class="red">*</span></label>
                 <input type="text" #title="ngModel" ngModel name="themeName" id="themeName" required minlength="5">

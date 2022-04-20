@@ -20,7 +20,7 @@
         </ng-container>
 
         <ng-container *ngIf="editMode">
-            <form #editForm="ngForm" (ngSubmit)="editProfile(editForm)">
+            <form [ngFormOptions]="{updateOn: 'blur'}" #editForm="ngForm" (ngSubmit)="editProfile(editForm)">
                 <div class="flex">
                     <p>Username: </p>
                     <input #username="ngModel" ngModel name="username" type="text" name="username" id="username" 
