@@ -5,7 +5,7 @@
 
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input formControlName="email" class="input-error" type="email" name="email" id="email"placeholder="Email adress">
+                <input formControlName="email" class="input-error" type="email" name="email" id="email" placeholder="Email adress">
             </p>
 
             <ng-container *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid">
@@ -16,7 +16,7 @@
                     Email is not valid!
                 </p>
             </ng-container>
-            
+
             <p class="field field-icon">
                 <label for="password"><span><i class="fas fa-lock"></i></span></label>
                 <input formControlName="password" type="password" name="password" id="password" placeholder="******">
@@ -30,7 +30,7 @@
                     Password must be at least 5 characters!
                 </p>
             </ng-container>
-            
+
             <button type="submit" [disabled]="loginForm.invalid">Login</button>
 
             <p class="text-center">

@@ -19,5 +19,13 @@ export class PostsService {
   getRecentPosts(): Observable<IPost[]>{
     return this.http.get<IPost[]>(`${baseUrl}/posts?limit=5`, { withCredentials: true });
   }
+
+  sendLike(id: string): Observable<IPost>{
+    return this.http.put<IPost>(`${baseUrl}/likes/${id}`, {}, { withCredentials: true });
+  }
+
+  deleteItem(themeId: string, postId: string) {
+    return this.http.delete(`${baseUrl}/themes/${themeId}/posts/${postId}`, { withCredentials: true });
+  }
   
 }

@@ -9,19 +9,21 @@ import { ThemeContentComponent } from './theme-content/theme-content.component';
 import { ThemesService } from '../services/themes.service';
 import { PostsService } from '../services/posts.service';
 import { FormsModule } from '@angular/forms';
+import { ThemeItemComponent } from './theme-item/theme-item.component';
 
 
 @NgModule({
   declarations: [
     ThemesComponent,
+    ThemeItemComponent,
     CreateThemeComponent,
-    ThemeContentComponent
+    ThemeContentComponent,
   ],
   imports: [
     CommonModule,
-    ThemeRoutingModule,
     MatProgressBarModule,
     CoreModule,
+    ThemeRoutingModule,
     FormsModule
   ],
   providers: [
