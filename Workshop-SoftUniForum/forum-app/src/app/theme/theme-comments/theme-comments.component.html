@@ -1,0 +1,82 @@
+<header class="header">
+    <p>
+        <span>{{ post.userId.username }}</span> posted on 
+        <time>{{ post.created_at | date: 'yyyy-MM-dd - hh:mm:ss' }}</time>
+    </p>
+</header>
+<div class="comment-main">
+    <div class="userdetails">
+        <img src="../../../assets/profile.png" alt="avatar">
+    </div>
+    <div class="post-content">
+        <p>{{ post.text }}</p>
+    </div>
+</div>
+
+<div class="footer">
+    <div *ngIf="isLogged && userOperations" class="user-buttons">
+        <button (click)="deleteComment(post)"class="subscribe">Delete</button>
+        <button (click)="viewComment(post)" class="subscribe">Edit</button>
+    </div>
+
+    <i *ngIf="isLogged && canLike(post)" (click)="likeComment(post)" class="fas fa-thumbs-up"></i>
+    <i *ngIf="isLogged && !canLike(post)" class="fas fa-thumbs-down"></i>
+    <p>
+        <span>{{ post.likes.length }}</span>
+    </p>
+    <p>
+        <span *ngIf="isLogged">{{ canLike(post) ? 'Like' : 'Liked' }}</span>
+        <span *ngIf="!isLogged && post.likes.length == 1">Like</span>
+        <span *ngIf="!isLogged && post.likes.length > 1">Likes</span>
+        <span *ngIf="!isLogged && post.likes.length == 0">Likes</span>
+    </p>
+</div>
+
+<!-- post-comment -->
+<div *ngIf="isLogged && !editMode && index == theme?.posts?.length! - 1" class="answer-comment">
+    <p><span>{{username}}</span> comment:</p>
+    <div class="answer">
+        <form [ngFormOptions]="{updateOn: 'blur'}" #editForm="ngForm" (ngSubmit)="postComment(editForm, post)">
+            <textarea #textContent="ngModel" ngModel name="postText" id="comment"
+            cols="30" rows="10" required minlength="5" ></textarea>
+
+            <ng-container *ngIf="textContent.touched && textContent.invalid">
+                <p class="error" *ngIf="textContent.errors?.['required']">
+                    The field with your post is required.
+                </p>
+                <p class="error" *ngIf="textContent.errors?.['minlength']">
+                    Post must be at least 5 characters long.
+                </p>
+            </ng-container>
+
+            <div class="comment-buttons">
+                <button type="button" (click)="editMode = false">Cancel</button>
+                <button>Post</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="isLogged && editMode && index == theme?.posts?.length! - 1" class="answer-comment">
+    <p><span>{{username}}</span> comment:</p>
+    <div class="answer">
+        <form [ngFormOptions]="{updateOn: 'blur'}" #editForm="ngForm" (ngSubmit)="editComment(editForm, post)">
+            <textarea #textContent="ngModel" ngModel name="postText" id="comment"
+            cols="30" rows="10" [ngModel]="viewComment(post)" required minlength="5" ></textarea>
+
+            <ng-container *ngIf="textContent.touched && textContent.invalid">
+                <p class="error" *ngIf="textContent.errors?.['required']">
+                    The field with your post is required.
+                </p>
+                <p class="error" *ngIf="textContent.errors?.['minlength']">
+                    Post must be at least 5 characters long.
+                </p>
+            </ng-container>
+
+            <div class="comment-buttons">
+                <button type="button" class="cancel" (click)="editForm.reset()">Cancel</button>
+                <button>Post</button>
+            </div>
+        </form>
+    </div>
+</div>

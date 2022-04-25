@@ -2,7 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { ITheme } from 'src/app/interfaces';
 import { ThemesService } from 'src/app/services/themes.service';
 import { UserService } from 'src/app/services/user.service';
-import { Router } from '@angular/router';
+import { ThemeContentComponent } from './../theme-content/theme-content.component';
 
 @Component({
   selector: 'app-theme-item',
@@ -19,7 +19,7 @@ export class ThemeItemComponent implements OnChanges {
   constructor(
     private userService: UserService, 
     private themeService: ThemesService,
-    private router: Router) { }
+    private themeContent: ThemeContentComponent) { }
 
   ngOnChanges(): void {
     if (this.userId) {
@@ -29,8 +29,7 @@ export class ThemeItemComponent implements OnChanges {
 
   subscribeThemeWithParameter(theme: ITheme) {
     this.themeService.sendSubscription(theme._id).subscribe(() => {
-      this.router.navigate(['/themes', theme._id]);
+      this.themeContent.refreshView(theme._id);
     });
   }
-
 }

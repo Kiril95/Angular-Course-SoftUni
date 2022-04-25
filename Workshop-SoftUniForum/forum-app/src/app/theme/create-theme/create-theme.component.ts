@@ -13,6 +13,10 @@ export class CreateThemeComponent {
   constructor(private themeService: ThemesService, private router: Router) { }
   
   submitTheme(addThemeForm: NgForm){
+    if (addThemeForm.invalid) {
+      return;
+    }
+    
     this.themeService.addTheme(addThemeForm.value).subscribe({
       next: (theme) => {
         this.router.navigate(['/themes']);

@@ -27,5 +27,12 @@ export class PostsService {
   deleteItem(themeId: string, postId: string) {
     return this.http.delete(`${baseUrl}/themes/${themeId}/posts/${postId}`, { withCredentials: true });
   }
-  
+
+  editItem(postText: string, themeId: string, postId: string): Observable<IPost> {
+    return this.http.put<IPost>(`${baseUrl}/themes/${themeId}/posts/${postId}`, postText, { withCredentials: true });
+  }
+
+  postItem(postText: string, themeId: string): Observable<IPost> {
+    return this.http.post<IPost>(`${baseUrl}/themes/${themeId}`, postText, { withCredentials: true });
+  }
 }

@@ -10,6 +10,7 @@ import { ThemesService } from '../services/themes.service';
 import { PostsService } from '../services/posts.service';
 import { FormsModule } from '@angular/forms';
 import { ThemeItemComponent } from './theme-item/theme-item.component';
+import { ThemeCommentsComponent } from './theme-comments/theme-comments.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ThemeItemComponent } from './theme-item/theme-item.component';
     ThemeItemComponent,
     CreateThemeComponent,
     ThemeContentComponent,
+    ThemeCommentsComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { ThemeItemComponent } from './theme-item/theme-item.component';
   providers: [
     ThemesService,
     PostsService,
+    ThemeContentComponent
   ],
 })
 export class ThemeModule { }

@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ThemesService } from '../../services/themes.service';
 import { ITheme } from '../../interfaces/theme';
 import { IPost } from '../../interfaces';
@@ -13,7 +13,6 @@ import { UserService } from 'src/app/services/user.service';
 export class ThemesComponent implements OnInit {
   themes: ITheme[] | undefined;
   posts: IPost[] | undefined;
-  canSubscribe: boolean = false;
 
   get isLogged(): boolean{
     return this.userService.isLogged;
@@ -38,5 +37,4 @@ export class ThemesComponent implements OnInit {
     this.posts = undefined;
     this.postService.getRecentPosts().subscribe(post => this.posts = post);
   }
-
 }

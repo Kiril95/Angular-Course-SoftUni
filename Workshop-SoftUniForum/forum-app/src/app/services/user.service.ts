@@ -44,5 +44,4 @@ export class UserService {
     return this.http.put<IUser>(`${baseUrl}/users/profile`, data, { withCredentials: true })
     .pipe(tap(currUser => this.user = currUser));
   }
-
 }
