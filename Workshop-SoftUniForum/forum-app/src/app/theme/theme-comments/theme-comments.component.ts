@@ -17,6 +17,7 @@ export class ThemeCommentsComponent implements OnChanges {
   editMode: boolean = false;
   userId = this.userService.user?._id as string | undefined;
   username: string | undefined = this.userService.user?.username;
+  commentText: any;
   
   @Input() index!: number;
   @Input() post!: IPost;
@@ -52,23 +53,26 @@ export class ThemeCommentsComponent implements OnChanges {
   }
 
   deleteComment(comment: any) {
-    console.log(comment);
     const themeId = comment.themeId;
     const postId = comment._id;
 
-    // TO DO :)
-    // this.postService.deleteItem(comment._id).subscribe(() => {  
-    //   this.router.navigate([`/themes`]);
-    // });
+    this.postService.deleteItem(themeId, postId).subscribe({
+      next: () => {        
+        this.refreshView(themeId);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
-  postComment(editForm: NgForm, comment: any) {
-    if (editForm.invalid) {
+  postComment(postForm: NgForm, comment: any) {
+    if (postForm.invalid) {
       return;
     }
     const themeId = comment.themeId;
-
-    this.postService.postItem(editForm.value, themeId).subscribe({
+    
+    this.postService.postItem(postForm.value, themeId).subscribe({
       next: () => {
         this.refreshView(themeId);
       },
@@ -78,9 +82,9 @@ export class ThemeCommentsComponent implements OnChanges {
     });
   }
 
-  viewComment(comment: IPost): string | undefined {
+  viewComment(comment: any): void {
     this.editMode = true;
-    return comment.text;
+    this.commentText = comment.text;
   }
 
   editComment(editForm: NgForm, comment: any) {
@@ -91,7 +95,7 @@ export class ThemeCommentsComponent implements OnChanges {
     const postId = comment._id;
 
     this.postService.editItem(editForm.value, themeId, postId).subscribe({
-      next: () => {
+      next: () => {        
         this.editMode = false;
         this.refreshView(themeId);
       },
